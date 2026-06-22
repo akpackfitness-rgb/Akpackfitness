@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="AK Pack Fitness — Elite gym in Kodungallur, Keetholi. Morning & Evening batches. Professional trainers."/>
+<title>AK PACK FITNESS | Kodungallur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#cc0000;--red-hot:#ff1a1a;--red-dim:rgba(204,0,0,0.15);
+  --red-glow:rgba(204,0,0,0.5);--black:#080808;--black2:#0f0f0f;
+  --black3:#161616;--black4:#1c1c1c;--border:rgba(255,255,255,0.06);
+  --text:#f0eeeb;--muted:rgba(240,238,235,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--red) #111}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+body{font-family:'Barlow',sans-serif;font-weight:300;background:var(--black);color:var(--text);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cursor{position:fixed;width:12px;height:12px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;mix-blend-mode:screen}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(204,0,0,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(5,5,5,0.95);backdrop-filter:blur(24px);border-bottom:1px solid rgba(204,0,0,0.25);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:72px}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.header-logo{display:flex;align-items:center;text-decoration:none;gap:10px}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:5px;background:linear-gradient(135deg,#fff 0%,var(--red-hot) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;display:block;margin-top:-2px}
+
+nav{display:flex;align-items:center;gap:24px}
+nav a{color:var(--muted);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase;position:relative;transition:color 0.2s}
+nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width 0.3s}
+nav a:hover{color:var(--text)}
+nav a:hover::after{width:100%}
+.nav-cta{background:var(--red);color:white!important;padding:8px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:box-shadow 0.2s}
+.nav-cta:hover{box-shadow:0 0 20px var(--red-glow)}
+
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+.nav-mobile{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(5,5,5,0.98);backdrop-filter:blur(24px);flex-direction:column;padding:20px 5vw 30px;gap:4px;border-bottom:1px solid rgba(204,0,0,0.2);z-index:499}
+.nav-mobile.open{display:flex}
+.nav-mobile a{color:var(--muted);text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:18px;letter-spacing:3px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid var(--border);transition:color 0.2s}
+.nav-mobile a:hover{color:var(--red-hot)}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:100px 8vw 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(110deg,rgba(5,5,5,0.97) 0%,rgba(10,0,0,0.85) 45%,rgba(0,0,0,0.6) 100%),url("https://images.unsplash.com/photo-1581009137042-c552e485697a?w=1600") center/cover no-repeat;animation:heroZoom 20s ease-in-out infinite alternate}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hero-slash{position:absolute;top:0;right:22%;width:2px;height:100%;background:linear-gradient(to bottom,transparent,var(--red),transparent);opacity:0.2;z-index:1}
+.hero>*:not(.hero-bg):not(.hero-slash){position:relative;z-index:2}
+
+.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--red-hot);display:flex;align-items:center;gap:14px;margin-bottom:24px;animation:fadeUp 0.8s ease both}
+.hero-eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--red-hot)}
+
+/* THE PACK logo text styled in CSS */
+.hero-brand{margin-bottom:20px;animation:fadeUp 0.8s 0.1s ease both}
+.hero-brand-the{font-family:'Barlow Condensed',sans-serif;font-size:clamp(16px,2.5vw,28px);font-weight:700;letter-spacing:8px;color:var(--red);text-transform:uppercase;display:block;margin-bottom:-8px}
+.hero-brand-pack{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,180px);line-height:0.85;letter-spacing:4px;display:flex;gap:0}
+.hero-brand-pack span:nth-child(1){color:#fff;text-shadow:2px 2px 0 #111}
+.hero-brand-pack span:nth-child(2){color:var(--red);text-shadow:2px 2px 0 #600}
+.hero-brand-pack span:nth-child(3){color:#fff;text-shadow:2px 2px 0 #111}
+.hero-brand-pack span:nth-child(4){color:var(--red);text-shadow:2px 2px 0 #600}
+.hero-brand-tagline{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,1.5vw,13px);font-weight:400;letter-spacing:5px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-top:8px;display:block;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px}
+
+.hero-gymname{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3.5vw,42px);letter-spacing:6px;color:rgba(255,255,255,0.6);margin-bottom:12px;animation:fadeUp 0.8s 0.2s ease both}
+.hero-gymname span{color:var(--red)}
+
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,0.5);max-width:400px;line-height:1.7;margin-bottom:36px;animation:fadeUp 0.8s 0.3s ease both}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;animation:fadeUp 0.8s 0.4s ease both}
+
+.hero-corner{position:absolute;bottom:60px;right:8vw;width:90px;height:90px;z-index:2;opacity:0.3}
+.hero-corner::before{content:'';position:absolute;bottom:0;right:0;width:100%;height:2px;background:var(--red)}
+.hero-corner::after{content:'';position:absolute;bottom:0;right:0;width:2px;height:100%;background:var(--red)}
+.scroll-hint{position:absolute;bottom:32px;left:8vw;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);z-index:2;animation:fadeUp 1s 0.6s ease both}
+.scroll-hint::before{content:'';width:1px;height:40px;background:linear-gradient(to bottom,var(--red),transparent)}
+
+/* TICKER */
+.stats-bar{background:var(--red);padding:14px 0;overflow:hidden}
+.stats-track{display:flex;white-space:nowrap;animation:ticker 30s linear infinite}
+.stat-item{display:inline-flex;align-items:center;gap:10px;padding:0 36px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.stat-item::after{content:'✦';opacity:0.5;margin-left:16px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* QUOTE */
+.quote-section{background:var(--black2);border-top:1px solid rgba(204,0,0,0.2);border-bottom:1px solid rgba(204,0,0,0.2);padding:80px 5vw;position:relative;overflow:hidden}
+.quote-section::before{content:'';position:absolute;top:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(204,0,0,0.12),transparent 70%);pointer-events:none}
+.quote-inner{max-width:900px;margin:auto;text-align:center;position:relative;z-index:1}
+.quote-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:14px}
+.quote-label::before,.quote-label::after{content:'';flex:1;max-width:60px;height:1px;background:var(--red)}
+#quote-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,4.5vw,56px);line-height:1.1;letter-spacing:1px;transition:opacity 0.5s,transform 0.5s;min-height:60px}
+#quote-author{margin-top:16px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--red-hot);font-weight:600;font-family:'Barlow Condensed',sans-serif;transition:opacity 0.5s}
+.quote-fade{opacity:0;transform:translateY(10px)!important}
+.quote-dots{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.qdot{width:6px;height:6px;border-radius:50%;background:var(--black4);border:1px solid rgba(204,0,0,0.3);cursor:pointer;transition:background 0.3s}
+.qdot.active{background:var(--red);box-shadow:0 0 8px var(--red)}
+
+/* SECTION UTILS */
+.section-wrap{padding:90px 5vw;max-width:1300px;margin:auto}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,66px);line-height:0.9;letter-spacing:2px}
+.section-title span{display:block;color:var(--red)}
+.section-desc{max-width:340px;font-size:14px;color:var(--muted);line-height:1.7;text-align:right}
+
+/* KNOWLEDGE GRID */
+.knowledge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.know-card{background:var(--black3);padding:38px 30px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform 0.3s,background 0.3s}
+.know-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)}
+.know-card:hover{background:var(--black4);transform:translateY(-4px)}
+.know-card:hover::before{transform:scaleX(1)}
+.know-number{font-family:'Bebas Neue',sans-serif;font-size:60px;line-height:1;color:rgba(204,0,0,0.1);position:absolute;top:16px;right:20px;user-select:none;transition:color 0.3s}
+.know-card:hover .know-number{color:rgba(204,0,0,0.22)}
+.know-icon{width:42px;height:42px;background:var(--red-dim);border:1px solid rgba(204,0,0,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:18px;transition:background 0.3s,box-shadow 0.3s}
+.know-card:hover .know-icon{background:var(--red);box-shadow:0 0 20px var(--red-glow)}
+.know-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.know-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;margin-bottom:12px;line-height:1.1}
+.know-body{font-size:13px;color:var(--muted);line-height:1.75}
+.know-stat{margin-top:18px;padding-top:18px;border-top:1px solid var(--border);display:flex;align-items:baseline;gap:8px}
+.know-stat-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--red-hot);line-height:1}
+.know-stat-label{font-size:11px;color:var(--muted);letter-spacing:1px}
+
+/* MUSCLE SECTION */
+.muscle-section{background:var(--black2);border-top:1px solid rgba(204,0,0,0.15);border-bottom:1px solid rgba(204,0,0,0.15);padding:90px 5vw;position:relative;overflow:hidden}
+.muscle-section::before{content:'STRENGTH';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:22vw;color:rgba(204,0,0,0.03);letter-spacing:10px;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;user-select:none}
+.muscle-inner{max-width:1300px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.muscle-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.muscle-row:last-child{border-bottom:none}
+.muscle-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;width:110px;flex-shrink:0}
+.muscle-bar{flex:1;height:4px;background:var(--black4);border-radius:2px;overflow:hidden}
+.muscle-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red-hot));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 8px var(--red-glow)}
+.muscle-pct{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red-hot);width:40px;text-align:right}
+.muscle-right{display:flex;justify-content:center;align-items:center}
+.body-svg{width:100%;max-width:280px;height:auto;filter:drop-shadow(0 0 30px rgba(204,0,0,0.2))}
+
+/* TIPS */
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:56px}
+.tip-card{background:var(--black3);border:1px solid var(--border);padding:32px 28px;position:relative;overflow:hidden;transition:all 0.3s}
+.tip-card:hover{border-color:rgba(204,0,0,0.3);background:var(--black4)}
+.tip-card-accent{position:absolute;top:0;right:0;width:60px;height:60px;background:linear-gradient(225deg,rgba(204,0,0,0.15),transparent)}
+.tip-emoji{font-size:26px;margin-bottom:14px}
+.tip-category{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.tip-headline{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:10px;line-height:1.15}
+.tip-body{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* CHART */
+.chart-section{background:var(--black2);border-top:1px solid rgba(204,0,0,0.15);padding:90px 5vw}
+.chart-inner{max-width:1300px;margin:auto}
+.chart-wrap{margin-top:56px;background:var(--black3);border:1px solid var(--border);border-radius:4px;padding:36px;position:relative;overflow:hidden}
+canvas#progressChart{display:block;width:100%!important}
+.chart-legend{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
+.legend-item{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+
+/* HOURS */
+.hours-section{padding:90px 5vw;max-width:1300px;margin:auto}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px}
+.hours-card{background:var(--black3);border:1px solid var(--border);padding:36px 32px;position:relative;overflow:hidden;transition:all 0.3s}
+.hours-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1)}
+.hours-card:hover{background:var(--black4)}
+.hours-card:hover::before{transform:scaleY(1)}
+.hours-day{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:var(--red);margin-bottom:18px}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.hours-row:last-child{border-bottom:none}
+.hours-period{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.hours-time{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--text)}
+.hours-badge{display:inline-block;background:var(--red-dim);border:1px solid rgba(204,0,0,0.3);color:var(--red-hot);font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:14px}
+.hours-closed{color:rgba(240,238,235,0.2);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px}
+
+/* REVIEWS */
+.reviews-section{background:var(--black2);border-top:1px solid rgba(204,0,0,0.15);padding:90px 5vw}
+.reviews-track-wrap{overflow:hidden;margin-top:56px;position:relative}
+.reviews-track-wrap::before{content:'';position:absolute;top:0;bottom:0;left:0;width:60px;background:linear-gradient(to right,var(--black2),transparent);z-index:2;pointer-events:none}
+.reviews-track-wrap::after{content:'';position:absolute;top:0;bottom:0;right:0;width:60px;background:linear-gradient(to left,var(--black2),transparent);z-index:2;pointer-events:none}
+.reviews-track{display:flex;gap:16px;animation:reviewScroll 40s linear infinite;width:max-content}
+.reviews-track:hover{animation-play-state:paused}
+@keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.review-card{background:var(--black3);border:1px solid var(--border);padding:28px;width:280px;flex-shrink:0;border-radius:2px;position:relative}
+.review-card::before{content:'"';position:absolute;top:8px;right:18px;font-family:'Bebas Neue',sans-serif;font-size:70px;color:rgba(204,0,0,0.07);line-height:1}
+.review-stars{color:var(--red);font-size:13px;margin-bottom:12px;letter-spacing:2px}
+.review-text{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:18px;font-style:italic}
+.review-author{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text)}
+.review-date{font-size:11px;color:rgba(240,238,235,0.22);margin-top:3px}
+.review-google{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(240,238,235,0.25);text-transform:uppercase}
+
+/* GALLERY */
+.gallery-section{padding:90px 5vw;max-width:1300px;margin:auto}
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:4px;margin-top:56px}
+.gallery-item{position:relative;overflow:hidden}
+.gallery-item:first-child{grid-row:span 2}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%) contrast(1.1);transition:transform 0.5s,filter 0.4s}
+.gallery-item:hover img{transform:scale(1.06);filter:grayscale(0%) contrast(1.2)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.55),transparent 50%);pointer-events:none}
+.gallery-item-label{position:absolute;bottom:14px;left:18px;z-index:2;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+
+/* MAP */
+.map-section{background:var(--black2);border-top:1px solid rgba(204,0,0,0.15);padding:90px 5vw}
+.map-inner{max-width:1300px;margin:auto}
+.map-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:60px;align-items:start;margin-top:56px}
+.map-info-item{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border)}
+.map-info-item:last-child{border-bottom:none}
+.map-icon{width:40px;height:40px;background:var(--red-dim);border:1px solid rgba(204,0,0,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.map-info-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:5px}
+.map-info-body{font-size:13px;color:var(--muted);line-height:1.7}
+.map-info-body a{color:var(--text);text-decoration:none;transition:color 0.2s}
+.map-info-body a:hover{color:var(--red-hot)}
+.map-embed{border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.map-embed iframe{display:block;width:100%;height:420px;border:none;filter:grayscale(80%) contrast(1.1)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:white;padding:14px 30px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;position:relative;overflow:hidden;transition:all 0.25s cubic-bezier(0.4,0,0.2,1)}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);opacity:0;transition:opacity 0.3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--red-glow)}
+.btn:hover::before{opacity:1}
+.btn-ghost{background:transparent;border:1px solid rgba(204,0,0,0.4)}
+.btn-ghost:hover{background:var(--red-dim);border-color:var(--red);box-shadow:0 0 20px var(--red-glow)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(204,0,0,0.2);padding:70px 5vw 30px}
+.footer-grid{max-width:1300px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
+.footer-brand-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:6px;background:linear-gradient(135deg,#fff 0%,var(--red-hot) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:6px}
+.footer-brand-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;color:var(--red);text-transform:uppercase;display:block;margin-bottom:16px}
+.footer-desc{font-size:13px;color:var(--muted);line-height:1.8;max-width:260px;margin-bottom:20px}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.footer-col a{display:block;color:var(--muted);text-decoration:none;font-size:13px;margin-bottom:10px;transition:color 0.2s}
+.footer-col a:hover{color:var(--text)}
+.footer-socials{display:flex;gap:10px;margin-top:4px}
+.social-btn{width:38px;height:38px;background:var(--black3);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s}
+.social-btn svg{transition:all 0.3s}
+.social-btn:hover{background:var(--red-dim);border-color:var(--red);transform:translateY(-2px)}
+.footer-bottom{max-width:1300px;margin:auto;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--muted);letter-spacing:1px}
+
+/* WHATSAPP */
+.whatsapp{position:fixed;bottom:24px;right:24px;z-index:400;background:#25D366;color:white;padding:12px 20px;border-radius:50px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;box-shadow:0 4px 24px rgba(37,211,102,0.35);display:flex;align-items:center;gap:8px;transition:transform 0.2s,box-shadow 0.2s}
+.whatsapp:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(37,211,102,0.45)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .knowledge-grid{grid-template-columns:repeat(2,1fr)}
+  .muscle-inner{grid-template-columns:1fr}
+  .muscle-right{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px}
+  .gallery-item:first-child{grid-row:auto}
+  .hours-grid{grid-template-columns:1fr}
+  .map-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .knowledge-grid{grid-template-columns:1fr}
+  header{padding:0 20px}
+  nav{display:none}
+  .hamburger{display:flex}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .gallery{grid-template-columns:1fr;grid-template-rows:auto}
+  .gallery-item:first-child{grid-row:auto}
+  .section-desc{text-align:left}
+  .hero-brand-pack{font-size:clamp(70px,18vw,130px)}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#home" class="header-logo">
+    <div>
+      <span class="logo-text">AK PACK FITNESS</span>
+      <span class="logo-sub">You don't train here alone</span>
+    </div>
+  </a>
+  <nav id="mainNav">
+    <a href="#knowledge">Knowledge</a>
+    <a href="#training">Training</a>
+    <a href="#hours">Hours</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#location">Location</a>
+    <a href="https://wa.me/917736336845" target="_blank" class="nav-cta">Join Now</a>
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="nav-mobile" id="navMobile">
+  <a href="#knowledge">Knowledge</a>
+  <a href="#training">Training</a>
+  <a href="#hours">Hours</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#location">Location</a>
+  <a href="https://wa.me/917736336845" target="_blank" style="color:var(--red-hot)!important">Join on WhatsApp ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-slash"></div>
+
+  <div class="hero-eyebrow">Kodungallur · Keetholi — Elite Fitness Center</div>
+
+  <div class="hero-brand">
+    <span class="hero-brand-the">THE</span>
+    <div class="hero-brand-pack">
+      <span>P</span><span>A</span><span>C</span><span>K</span>
+    </div>
+    <span class="hero-brand-tagline">— You don't train here alone —</span>
+  </div>
+
+  <div class="hero-gymname"><span>AK</span> PACK FITNESS</div>
+
+  <p class="hero-sub">Above Royal Enfield Showroom, Opp. Indus Motors, 2nd Floor, Kodungallur – Keetholi, Kerala.</p>
+
+  <div class="hero-btns">
+    <a href="https://wa.me/917736336845" target="_blank" class="btn">Join on WhatsApp ↗</a>
+    <a href="#hours" class="btn btn-ghost">View Timings</a>
+  </div>
+  <div class="hero-corner"></div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- TICKER -->
+<div class="stats-bar">
+  <div class="stats-track">
+    <span class="stat-item">Open Mon–Sat</span>
+    <span class="stat-item">Morning 5:30 AM</span>
+    <span class="stat-item">Evening Till 10 PM</span>
+    <span class="stat-item">Expert Trainers</span>
+    <span class="stat-item">Strength Training</span>
+    <span class="stat-item">HIIT Programs</span>
+    <span class="stat-item">Personalized Plans</span>
+    <span class="stat-item">You Don't Train Here Alone</span>
+    <span class="stat-item">Open Mon–Sat</span>
+    <span class="stat-item">Morning 5:30 AM</span>
+    <span class="stat-item">Evening Till 10 PM</span>
+    <span class="stat-item">Expert Trainers</span>
+    <span class="stat-item">Strength Training</span>
+    <span class="stat-item">HIIT Programs</span>
+    <span class="stat-item">Personalized Plans</span>
+    <span class="stat-item">You Don't Train Here Alone</span>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <div class="quote-label">Daily Motivation</div>
+    <div id="quote-text"></div>
+    <div id="quote-author"></div>
+    <div class="quote-dots" id="quoteDots"></div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE -->
+<section class="section-wrap reveal" id="knowledge">
+  <div class="section-header">
+    <div class="section-title"><span>Fitness</span>Knowledge</div>
+    <p class="section-desc">Science-backed principles to train smarter, recover faster, and perform better.</p>
+  </div>
+  <div class="knowledge-grid">
+    <div class="know-card"><div class="know-number">01</div><div class="know-icon">⚡</div><div class="know-tag">Strength</div><div class="know-title">Progressive Overload</div><div class="know-body">The cornerstone of muscle growth. Gradually increase weight, reps, or sets over time. Your body only adapts when forced to handle greater stress than it's used to.</div><div class="know-stat"><span class="know-stat-num">6–8</span><span class="know-stat-label">weeks to see measurable strength gains</span></div></div>
+    <div class="know-card"><div class="know-number">02</div><div class="know-icon">🔥</div><div class="know-tag">Metabolism</div><div class="know-title">HIIT Burns Fat Fast</div><div class="know-body">High-Intensity Interval Training creates an afterburn effect (EPOC). Your body continues burning calories for up to 24 hours post-workout.</div><div class="know-stat"><span class="know-stat-num">24h</span><span class="know-stat-label">elevated metabolism after HIIT session</span></div></div>
+    <div class="know-card"><div class="know-number">03</div><div class="know-icon">🥩</div><div class="know-tag">Nutrition</div><div class="know-title">Protein Timing Matters</div><div class="know-body">Consume 20–40g of protein within 45 minutes post-workout. This anabolic window maximizes muscle protein synthesis and accelerates recovery.</div><div class="know-stat"><span class="know-stat-num">2.2g</span><span class="know-stat-label">protein per kg of bodyweight daily</span></div></div>
+    <div class="know-card"><div class="know-number">04</div><div class="know-icon">😴</div><div class="know-tag">Recovery</div><div class="know-title">Sleep Is Your Superpower</div><div class="know-body">Growth hormone peaks during deep sleep. Muscles repair and grow while you rest. Less than 7 hours significantly reduces performance and recovery speed.</div><div class="know-stat"><span class="know-stat-num">7–9h</span><span class="know-stat-label">optimal sleep for peak athletic recovery</span></div></div>
+    <div class="know-card"><div class="know-number">05</div><div class="know-icon">💧</div><div class="know-tag">Hydration</div><div class="know-title">Dehydration Kills Gains</div><div class="know-body">A mere 2% drop in hydration reduces strength output by up to 19%. Water drives nutrient transport, joint lubrication, and temperature regulation.</div><div class="know-stat"><span class="know-stat-num">3–4L</span><span class="know-stat-label">daily water intake for active athletes</span></div></div>
+    <div class="know-card"><div class="know-number">06</div><div class="know-icon">🧠</div><div class="know-tag">Mind-Muscle</div><div class="know-title">The Mental Edge</div><div class="know-body">Focusing attention on the target muscle during a rep increases activation by up to 22%. Visualize the contraction — quality always beats quantity.</div><div class="know-stat"><span class="know-stat-num">+22%</span><span class="know-stat-label">muscle activation with mind-muscle focus</span></div></div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="muscle-section" id="training">
+  <div class="muscle-inner">
+    <div class="reveal">
+      <div class="section-title"><span>Train</span>Every Muscle</div>
+      <p style="font-size:14px;color:var(--muted);line-height:1.8;max-width:460px;margin-top:18px">Our programs at AK Pack Fitness are engineered to target every major muscle group with precision. Optimize your split for maximum results with expert guidance.</p>
+      <div style="margin-top:32px">
+        <div class="muscle-row"><span class="muscle-name">Chest</span><div class="muscle-bar"><div class="muscle-fill" data-pct="88"></div></div><span class="muscle-pct">88%</span></div>
+        <div class="muscle-row"><span class="muscle-name">Back</span><div class="muscle-bar"><div class="muscle-fill" data-pct="95"></div></div><span class="muscle-pct">95%</span></div>
+        <div class="muscle-row"><span class="muscle-name">Legs</span><div class="muscle-bar"><div class="muscle-fill" data-pct="92"></div></div><span class="muscle-pct">92%</span></div>
+        <div class="muscle-row"><span class="muscle-name">Shoulders</span><div class="muscle-bar"><div class="muscle-fill" data-pct="80"></div></div><span class="muscle-pct">80%</span></div>
+        <div class="muscle-row"><span class="muscle-name">Core</span><div class="muscle-bar"><div class="muscle-fill" data-pct="97"></div></div><span class="muscle-pct">97%</span></div>
+        <div class="muscle-row"><span class="muscle-name">Arms</span><div class="muscle-bar"><div class="muscle-fill" data-pct="75"></div></div><span class="muscle-pct">75%</span></div>
+      </div>
+    </div>
+    <div class="muscle-right reveal">
+      <svg class="body-svg" viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="36" r="28" fill="#1a0000" stroke="rgba(204,0,0,0.6)" stroke-width="1.5"/>
+        <circle cx="100" cy="36" r="28" fill="none" stroke="rgba(204,0,0,0.2)" stroke-width="8"/>
+        <rect x="90" y="62" width="20" height="20" rx="2" fill="#1a0000" stroke="rgba(204,0,0,0.4)" stroke-width="1"/>
+        <path d="M60 82 L140 82 L152 200 L48 200 Z" fill="#1a0000" stroke="rgba(204,0,0,0.6)" stroke-width="1.5"/>
+        <path d="M100 90 L100 160" stroke="rgba(204,0,0,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+        <path d="M65 110 Q100 130 135 110" stroke="rgba(204,0,0,0.25)" stroke-width="1"/>
+        <path d="M62 140 Q100 160 138 140" stroke="rgba(204,0,0,0.2)" stroke-width="1"/>
+        <path d="M60 86 L28 170 L38 200 L48 200 L60 160 L68 90Z" fill="#1a0000" stroke="rgba(204,0,0,0.5)" stroke-width="1.5"/>
+        <path d="M140 86 L172 170 L162 200 L152 200 L140 160 L132 90Z" fill="#1a0000" stroke="rgba(204,0,0,0.5)" stroke-width="1.5"/>
+        <path d="M28 170 L18 240 L26 242 L38 202Z" fill="#1a0000" stroke="rgba(204,0,0,0.4)" stroke-width="1.5"/>
+        <path d="M172 170 L182 240 L174 242 L162 202Z" fill="#1a0000" stroke="rgba(204,0,0,0.4)" stroke-width="1.5"/>
+        <ellipse cx="21" cy="248" rx="8" ry="12" fill="#1a0000" stroke="rgba(204,0,0,0.35)" stroke-width="1.5"/>
+        <ellipse cx="179" cy="248" rx="8" ry="12" fill="#1a0000" stroke="rgba(204,0,0,0.35)" stroke-width="1.5"/>
+        <path d="M48 200 L52 340 L72 340 L80 200Z" fill="#1a0000" stroke="rgba(204,0,0,0.5)" stroke-width="1.5"/>
+        <path d="M152 200 L148 340 L128 340 L120 200Z" fill="#1a0000" stroke="rgba(204,0,0,0.5)" stroke-width="1.5"/>
+        <path d="M52 340 L48 440 L68 440 L72 340Z" fill="#1a0000" stroke="rgba(204,0,0,0.4)" stroke-width="1.5"/>
+        <path d="M148 340 L152 440 L132 440 L128 340Z" fill="#1a0000" stroke="rgba(204,0,0,0.4)" stroke-width="1.5"/>
+        <path d="M44 440 L44 456 L72 456 L72 440Z" fill="#1a0000" stroke="rgba(204,0,0,0.35)" stroke-width="1.5"/>
+        <path d="M128 440 L128 456 L156 456 L156 440Z" fill="#1a0000" stroke="rgba(204,0,0,0.35)" stroke-width="1.5"/>
+        <ellipse cx="100" cy="141" rx="30" ry="40" fill="rgba(204,0,0,0.05)"/>
+        <circle cx="100" cy="141" r="50" fill="none" stroke="rgba(204,0,0,0.08)" stroke-width="1"><animate attributeName="r" values="50;70;50" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.2;0;0.2" dur="3s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="section-wrap reveal">
+  <div class="section-header">
+    <div class="section-title"><span>Pro Tips</span>&amp; Science</div>
+    <p class="section-desc">Auto-rotating every 8 seconds with real fitness science facts.</p>
+  </div>
+  <div class="tip-grid" id="tipGrid"></div>
+</section>
+
+<!-- CHART -->
+<section class="chart-section reveal">
+  <div class="chart-inner">
+    <div class="section-header">
+      <div class="section-title">Member<br><span>Progress</span></div>
+      <p class="section-desc">Average results from our 12-week transformation program.</p>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="progressChart" height="300"></canvas>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#cc0000"></div>Strength Index</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div>Endurance</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff9a3c"></div>Body Composition</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section reveal" id="hours">
+  <div class="section-header">
+    <div class="section-title"><span>Opening</span>Hours</div>
+    <p class="section-desc">We're open 6 days a week with both morning and evening batches.</p>
+  </div>
+  <div class="hours-grid">
+    <div class="hours-card">
+      <div class="hours-badge">Mon – Fri</div>
+      <div class="hours-day">Weekdays</div>
+      <div class="hours-row"><span class="hours-period">🌅 Morning Batch</span><span class="hours-time">5:30 AM – 10:30 AM</span></div>
+      <div class="hours-row"><span class="hours-period">🌆 Evening Batch</span><span class="hours-time">4:30 PM – 10:00 PM</span></div>
+    </div>
+    <div class="hours-card">
+      <div class="hours-badge">Saturday</div>
+      <div class="hours-day">Saturday</div>
+      <div class="hours-row"><span class="hours-period">🌅 Morning Batch</span><span class="hours-time">5:30 AM – 10:30 AM</span></div>
+      <div class="hours-row"><span class="hours-period">🌆 Evening Batch</span><span class="hours-time">4:30 PM – 9:00 PM</span></div>
+    </div>
+    <div class="hours-card" style="grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:28px 32px">
+      <div style="font-size:34px">🏖️</div>
+      <div><div class="hours-badge">Sunday</div><div class="hours-day" style="margin-bottom:4px">Sunday — Rest Day</div><div class="hours-closed">Closed — Recovery is part of the program!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section reveal" id="reviews">
+  <div style="max-width:1300px;margin:auto">
+    <div class="section-header">
+      <div class="section-title"><span>Google</span>Reviews</div>
+      <p class="section-desc">Real feedback from our members. Hover to pause.</p>
+    </div>
+    <div class="reviews-track-wrap"><div class="reviews-track" id="reviewsTrack"></div></div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://maps.app.goo.gl/wP16b8am3E4BmMU36" target="_blank" class="btn btn-ghost">View All Reviews on Google ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section reveal" id="gallery">
+  <div class="section-header">
+    <div class="section-title">Inside<br><span>AK Pack</span></div>
+  </div>
+  <div class="gallery">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800" alt="Main Floor"/><span class="gallery-item-label">Main Floor</span></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600" alt="Weight Training"/><span class="gallery-item-label">Weight Training</span></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600" alt="Cardio Zone"/><span class="gallery-item-label">Cardio Zone</span></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600" alt="Coaching"/><span class="gallery-item-label">Personal Coaching</span></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600" alt="Training"/><span class="gallery-item-label">Group Training</span></div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section reveal" id="location">
+  <div class="map-inner">
+    <div class="section-header">
+      <div class="section-title">Find<br><span>Us Here</span></div>
+      <p class="section-desc">Above Royal Enfield Showroom, Kodungallur.</p>
+    </div>
+    <div class="map-grid">
+      <div>
+        <div class="map-info-item"><div class="map-icon">📍</div><div><div class="map-info-title">Address</div><div class="map-info-body">Above Royal Enfield Showroom,<br>Opp. Indus Motors, 2nd Floor,<br>Kodungallur – Keetholi, Kerala</div></div></div>
+        <div class="map-info-item"><div class="map-icon">📞</div><div><div class="map-info-title">Phone</div><div class="map-info-body"><a href="tel:+917736336845">+91 77363 36845</a></div></div></div>
+        <div class="map-info-item"><div class="map-icon">💬</div><div><div class="map-info-title">WhatsApp</div><div class="map-info-body"><a href="https://wa.me/917736336845" target="_blank">+91 77363 36845</a></div></div></div>
+        <div class="map-info-item"><div class="map-icon">🕐</div><div><div class="map-info-title">Hours</div><div class="map-info-body">Mon–Fri: 5:30–10:30 AM &amp; 4:30–10 PM<br>Saturday: 5:30–10:30 AM &amp; 4:30–9 PM<br>Sunday: Closed</div></div></div>
+        <div class="map-info-item"><div class="map-icon">📱</div><div><div class="map-info-title">Social Media</div><div class="map-info-body"><a href="https://www.instagram.com/ak.4_19?igsh=aDA0MzE0b3czNDFo&utm_source=qr" target="_blank">Instagram: @ak.4_19</a><br><a href="https://www.facebook.com/share/1As9YtS16y/?mibextid=wwXIfr" target="_blank">Facebook Page</a></div></div></div>
+      </div>
+      <div class="map-embed">
+        <iframe src="https://maps.google.com/maps?q=Kodungallur+Keetholi+Kerala&output=embed" allowfullscreen="" loading="lazy" title="AK Pack Fitness Location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-brand-name">AK PACK FITNESS</span>
+      <span class="footer-brand-tag">You don't train here alone</span>
+      <p class="footer-desc">Above Royal Enfield Showroom, Opp. Indus Motors, 2nd Floor, Kodungallur – Keetholi, Kerala.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/ak.4_19?igsh=aDA0MzE0b3czNDFo&utm_source=qr" target="_blank" class="social-btn" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.facebook.com/share/1As9YtS16y/?mibextid=wwXIfr" target="_blank" class="social-btn" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="https://wa.me/917736336845" target="_blank" class="social-btn" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="tel:+917736336845" class="social-btn" aria-label="Call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <a href="#">Strength Training</a><a href="#">HIIT Conditioning</a><a href="#">Body Recomposition</a><a href="#">Weight Loss</a><a href="#">Nutrition Plans</a>
+    </div>
+    <div class="footer-col">
+      <h4>Facility</h4>
+      <a href="#training">Equipment</a><a href="#hours">Timings</a><a href="#gallery">Gallery</a><a href="#reviews">Reviews</a><a href="#location">Location</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="https://wa.me/917736336845" target="_blank">WhatsApp Us</a>
+      <a href="tel:+917736336845">Call: 77363 36845</a>
+      <a href="https://www.instagram.com/ak.4_19" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1As9YtS16y/" target="_blank">Facebook</a>
+      <a href="https://maps.app.goo.gl/wP16b8am3E4BmMU36" target="_blank">Get Directions</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 AK Pack Fitness — Kodungallur, Kerala. All rights reserved.</span>
+    <span>Above Royal Enfield Showroom, Keetholi</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/917736336845" target="_blank" class="whatsapp">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Chat on WhatsApp
+</a>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px'});
+document.querySelectorAll('a,button,.know-card,.tip-card,.review-card,.hours-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='64px';ring.style.height='64px'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='36px';ring.style.height='36px'});
+});
+
+// MOBILE NAV
+const hbg=document.getElementById('hamburger'),nm=document.getElementById('navMobile');
+if(hbg)hbg.addEventListener('click',()=>nm.classList.toggle('open'));
+if(nm)nm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nm.classList.remove('open')));
+
+// QUOTES
+const quotes=[
+  {text:"The only bad workout is the one that didn't happen.",author:"— Unknown"},
+  {text:"Train insane or remain the same.",author:"— Jillian Michaels"},
+  {text:"Your body can stand almost anything. It's your mind you have to convince.",author:"— Unknown"},
+  {text:"No pain, no gain. Shut up and train.",author:"— Unknown"},
+  {text:"Champions aren't made in gyms. They're made from something deep inside.",author:"— Muhammad Ali"},
+  {text:"The last three or four reps is what makes the muscle grow.",author:"— Arnold Schwarzenegger"},
+  {text:"Strength does not come from winning. Your struggles develop your strengths.",author:"— Arnold Schwarzenegger"},
+  {text:"If something stands between you and your success, move it. Never be denied.",author:"— Dwayne Johnson"},
+  {text:"You don't find the will to win. You bring it with you.",author:"— Urban Meyer"},
+  {text:"Success is usually the culmination of controlling failure.",author:"— Sylvester Stallone"},
+];
+let qIdx=0;
+const qText=document.getElementById('quote-text'),qAuth=document.getElementById('quote-author'),dotsEl=document.getElementById('quoteDots');
+if(qText&&dotsEl){
+  quotes.forEach((_,i)=>{const d=document.createElement('div');d.className='qdot'+(i===0?' active':'');d.addEventListener('click',()=>goQ(i));dotsEl.appendChild(d)});
+  function goQ(i){
+    qText.classList.add('quote-fade');qAuth.classList.add('quote-fade');
+    setTimeout(()=>{qIdx=i;qText.textContent='\u201C'+quotes[i].text+'\u201D';qAuth.textContent=quotes[i].author;qText.classList.remove('quote-fade');qAuth.classList.remove('quote-fade');document.querySelectorAll('.qdot').forEach((d,j)=>d.classList.toggle('active',j===i))},500);
+  }
+  goQ(0);setInterval(()=>goQ((qIdx+1)%quotes.length),6000);
+}
+
+// TIPS
+const allTips=[
+  {emoji:'🏋️',cat:'Strength',title:'Compound Lifts First',body:'Always do compound movements (squat, deadlift, bench) before isolation. Your CNS is freshest at the start — use it for big lifts.'},
+  {emoji:'⏱️',cat:'HIIT',title:'20-Minute Rule',body:'20 mins of HIIT 3x per week can match the fat-loss of 60 mins of steady-state cardio daily. Work smarter, not longer.'},
+  {emoji:'🥗',cat:'Nutrition',title:'Eat Greens Pre-Workout',body:'Nitrates in leafy greens boost blood flow to muscles by up to 20% — a natural pump you can eat.'},
+  {emoji:'🔄',cat:'Recovery',title:'Active Rest Days Win',body:'Light activity on rest days reduces DOMS by 40% by flushing lactic acid and increasing blood flow to damaged tissue.'},
+  {emoji:'☀️',cat:'Hormones',title:'Morning Sun = More Gains',body:'10 minutes of morning sunlight boosts testosterone and serotonin. Sets your circadian rhythm for better sleep and recovery.'},
+  {emoji:'🧊',cat:'Recovery',title:'Cold Exposure Works',body:'Cold showers post-workout reduce inflammation markers and cut recovery time by up to 30%. Keep it under 15 minutes.'},
+  {emoji:'📊',cat:'Training',title:'Track Everything',body:'Athletes who log workouts are 33% more consistent and progress 2x faster than those who train by feel alone.'},
+  {emoji:'💊',cat:'Nutrition',title:'Creatine Is King',body:'Creatine monohydrate is the most studied legal supplement. 3–5g daily increases strength output by 10–15%.'},
+  {emoji:'🧘',cat:'Mental',title:'Breathing Controls Output',body:'Box breathing before heavy sets reduces cortisol and improves focus — 4s in, 4s hold, 4s out.'},
+  {emoji:'🍌',cat:'Fuel',title:'Carbs Not the Enemy',body:'Glycogen (from carbs) is primary fuel for high-intensity training. Low-carb before lifting cuts power by up to 25%.'},
+  {emoji:'📐',cat:'Form',title:'Slow Eccentrics Build More',body:'3–4 seconds on the lowering phase creates more hypertrophy than fast reps. Go slow to grow.'},
+  {emoji:'💤',cat:'Recovery',title:'Naps Spike Growth Hormone',body:'A 20-minute nap triggers a pulse of growth hormone. Elite athletes use napping to double recovery between sessions.'},
+];
+const tipGrid=document.getElementById('tipGrid');
+let tipSet=0;
+function renderTips(){
+  if(!tipGrid)return;
+  const s=(tipSet*4)%allTips.length,b=[];
+  for(let i=0;i<4;i++)b.push(allTips[(s+i)%allTips.length]);
+  tipGrid.innerHTML='';
+  b.forEach((t,i)=>{
+    const d=document.createElement('div');d.className='tip-card reveal';
+    d.innerHTML=`<div class="tip-card-accent"></div><div class="tip-emoji">${t.emoji}</div><div class="tip-category">${t.cat}</div><div class="tip-headline">${t.title}</div><div class="tip-body">${t.body}</div>`;
+    tipGrid.appendChild(d);setTimeout(()=>d.classList.add('visible'),50+i*80);
+  });
+  tipSet++;
+}
+renderTips();setInterval(renderTips,8000);
+
+// REVIEWS
+const revs=[
+  {name:'Arjun K.',stars:5,text:'Best gym in Kodungallur! Dedicated trainers and top equipment. Transformed my body in 3 months!',date:'2 weeks ago'},
+  {name:'Priya S.',stars:5,text:'AK Pack Fitness changed my life. Morning sessions at 5:30 AM are amazing — trainers always energetic!',date:'1 month ago'},
+  {name:'Mohammed R.',stars:5,text:'Great atmosphere and professional coaching. Evening batches well-managed. Highly recommended!',date:'3 weeks ago'},
+  {name:'Sneha T.',stars:5,text:"Tried many gyms but this one stands out. Trainers know exactly what they're doing and facility is very clean.",date:'1 month ago'},
+  {name:'Rahul M.',stars:5,text:'Excellent gym with great trainers. Diet plans along with workouts are truly effective. Lost 12kg in 4 months!',date:'2 months ago'},
+  {name:'Divya P.',stars:4,text:'Really good gym with dedicated coaches. Timings very convenient — both early morning and evening work perfectly.',date:'3 weeks ago'},
+  {name:'Vishnu A.',stars:5,text:'Coaches at AK Pack push you to your limits in the best way. Results speak for themselves. Worth every penny!',date:'1 week ago'},
+  {name:'Fathima N.',stars:5,text:'Safe and welcoming environment. Trainers ensure your form is correct to avoid injuries. Love it here!',date:'5 days ago'},
+];
+function buildRevs(){
+  const t=document.getElementById('reviewsTrack');if(!t)return;
+  const d=[...revs,...revs];
+  t.innerHTML=d.map(r=>`<div class="review-card"><div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><div class="review-text">"${r.text}"</div><div class="review-author">${r.name}</div><div class="review-date">${r.date}</div><div class="review-google"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Google Review</div></div>`).join('');
+}
+buildRevs();
+
+// CHART
+function drawChart(){
+  const c=document.getElementById('progressChart');if(!c)return;
+  const ctx=c.getContext('2d');
+  const W=c.parentElement.clientWidth-80,H=280;
+  c.width=W;c.height=H;
+  const weeks=['Wk1','Wk2','Wk3','Wk4','Wk5','Wk6','Wk7','Wk8','Wk9','Wk10','Wk11','Wk12'];
+  const ds=[{color:'#cc0000',data:[10,18,26,34,40,49,55,63,70,78,85,92]},{color:'#ff6b6b',data:[8,14,22,28,35,42,50,56,62,68,75,80]},{color:'#ff9a3c',data:[5,10,16,21,27,33,38,44,50,55,60,65]}];
+  const pL=50,pR=20,pT=20,pB=40,pW=W-pL-pR,pH=H-pT-pB;
+  ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){const y=pT+pH-(i/5)*pH;ctx.beginPath();ctx.moveTo(pL,y);ctx.lineTo(W-pR,y);ctx.stroke();ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='10px Barlow,sans-serif';ctx.fillText((i*20)+'%',pL-32,y+4)}
+  ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='10px Barlow,sans-serif';
+  weeks.forEach((w,i)=>{const x=pL+(i/(weeks.length-1))*pW;ctx.fillText(w,x-10,H-8)});
+  ds.forEach(d=>{
+    ctx.beginPath();d.data.forEach((v,i)=>{const x=pL+(i/(weeks.length-1))*pW,y=pT+pH-(v/100)*pH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+    ctx.lineTo(pL+pW,pT+pH);ctx.lineTo(pL,pT+pH);ctx.closePath();
+    const h=d.color.replace('#',''),r=parseInt(h.substring(0,2),16),g=parseInt(h.substring(2,4),16),b=parseInt(h.substring(4,6),16);
+    const gr=ctx.createLinearGradient(0,pT,0,pT+pH);gr.addColorStop(0,`rgba(${r},${g},${b},0.18)`);gr.addColorStop(1,`rgba(${r},${g},${b},0)`);
+    ctx.fillStyle=gr;ctx.fill();
+    ctx.beginPath();d.data.forEach((v,i)=>{const x=pL+(i/(weeks.length-1))*pW,y=pT+pH-(v/100)*pH;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+    ctx.strokeStyle=d.color;ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();
+    d.data.forEach((v,i)=>{const x=pL+(i/(weeks.length-1))*pW,y=pT+pH-(v/100)*pH;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=d.color;ctx.fill()});
+  });
+}
+window.addEventListener('load',drawChart);window.addEventListener('resize',drawChart);
+
+// SCROLL REVEAL
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// MUSCLE BARS
+const bo=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('.muscle-fill').forEach(b=>{b.style.width=b.dataset.pct+'%'})})},{threshold:0.3});
+const ms=document.querySelector('.muscle-section');if(ms)bo.observe(ms);
+</script>
+</body>
+</html>
